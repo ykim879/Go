@@ -3,7 +3,7 @@ Go is a complied language. The toolchain convert source language to native. The 
 ## Initialization
 Format:
 1. s := ""  - short initialization gives appropriate types based on initialized value.
-2. var s string - empty initialization. Go initialize value with empty value when it is no explicit declaration
+2. var s string - empty initialization. Go initialize value with empty value when it is no explicit declaration. Using var followed with =. It needs to have either a declaration of type or an assignment value. 
 3. var s = ""
 4. var s string = "" - (3) and (4) is not recommended
 ## For Loop
@@ -13,6 +13,13 @@ for i:= 1; i < len(os.Args); i++ {
 ...
 }
 ```
+## Function
+``` Go
+func name(f param) float64 {
+return f / 9
+}
+```
+Declaration of function is done by funct, name, list of parameters and return list if it has any.
 ### Range
 It gives index and value for each element in array
 ``` Go
@@ -21,7 +28,13 @@ for _, arg := range arr[1:] {
 }
 ```
 ## Standard Libraries
-### os
+### default
+#### strings
+##### HasPrefix
+``` Go
+strings.HasPrefix(str, prefix)
+```
+### 1. os
 #### Printf
 ##### Percent Sign
 - %d: decimal integer
@@ -39,7 +52,7 @@ if err != nil {
 fmt.Fprintf(os.Stderr, "%v\n", err)
 }
 ```
-### bufio
+### 2. bufio
 #### Scanner (bufio.NewScanner(f)
 reads input and breaks it into lines or words.
 - Scan(): reads the next line and removes newline character. return true if there is new line false if there is no input.
@@ -51,6 +64,18 @@ output := input.Text() //this will read value that is inputted
 ...
 }
 ```
+### 3. http
+#### Get
+``` Go
+resp, err := http.Get(url)
+```
+Get makes HTTP request and return result in the structure of resp, if there is no error, and err, if any. field of resp contains server response as a readable stream. It needs to be closed after it is done using to avoid leaking the resources.
+### 4. ioutil
+#### ReadAll
+``` Go
+body, err := ioutil.ReadAll(resp.Body)
+```
+reads the entire response. returns a response and the error message if it has any.
 ## 4. Composite Types
 ### 4.3 Map
 a set of key/value pairs (like a dictionary)
