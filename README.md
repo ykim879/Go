@@ -1,11 +1,50 @@
 # Go
-Go is a complied language. The toolchain convert source language to native. The source code begins with package of the code, import statement, and program code. 
-## Initialization
+Go is a complied language. The toolchain convert source language to native. The source code begins with package of the code, import statement, and program code. This is mostly referenced from the book The Go Programming Language by Alan and Brian, having same structure as well.
+## 1. Program Structure 
+### 1.1 Initialization
 Format:
 1. s := ""  - short initialization gives appropriate types based on initialized value.
 2. var s string - empty initialization. Go initialize value with empty value when it is no explicit declaration. Using var followed with =. It needs to have either a declaration of type or an assignment value. 
 3. var s = ""
 4. var s string = "" - (3) and (4) is not recommended
+#### 1.1.1 Tuple Assignment
+``` Go
+x,y = y, x+y
+```
+All of the right-hand are evaluated before any of the variables are updated, so it is useful when we use values that are updating at the same time
+#### 1.1.2 Type Declaration
+``` Go
+type Celsius float64
+type Fahrenheit float64
+funct CToF(c Celsius) Fahrenheit {..}
+```
+Even the underlying type could be the same, if the type is different, they are not the same time. therefore comparison or assignment wouldn't happen because of different types. However, conversion will happen if the underlying type or same or pointer types point to variables. The conversion function can be manually written by below as well:
+``` Go
+func (c Celsius) String() String (return fmt.Sprintf("%gC", c)}
+```
+By using the above, below will execute the above function. Consider c is Celsius type.
+``` Go
+fmt.Println(c.String())
+fmt.Printf("%v", c)
+fmt.Printf("%s", c)
+fmt.Println(c)
+```
+fmt package automatically executes the function.
+### 1.2 Pointers
+Go uses Pointers as same as C, & means address and * is value they are pointint
+``` Go
+x := 1
+p := &x //pointer that points to x, stroing addresss of x.
+*p = 2 //change x value
+```
+#### 1.2.1 new Function
+initialize zero value and return address.
+``` Go
+p := new(int) // p is pointer with integer zero value, 0.
+```
+### 1.3 Lifetime and Scope of Variables
+The scope is a compile-time property while lifetime is runtime. 
+The scope is defined by implicit/explicit lexical blocks while the lifetime is until variables become unreachable. When the variables done with their lifetime, they can be recycled by garbage collector. The complier allocate local variables on the heap for long-lived and stack for short-lived.
 ## For Loop
 There is only one recursive function in Go, which is for loop. It is consisted of for initialization, condition, and update after each loop. The for loop also can consisted of condition statement or it can have none of them which will be infinite loop.
 ``` Go
@@ -13,6 +52,11 @@ for i:= 1; i < len(os.Args); i++ {
 ...
 }
 ```
+### 1.3 Package 
+#### 1.3.1 init Function
+init function can't be called or referenced and automatically executed when the program starts. It becomes handy when there is package level variables that should be precomputed.
+#### 1.3.2 Order of Compiling
+Initialization proceeds from the bottom up; the main package is the last to be initialized. If a has dependency on b, b initialized before a.
 ## Function
 ``` Go
 func name(f param) float64 {
