@@ -57,6 +57,12 @@ for i:= 1; i < len(os.Args); i++ {
 init function can't be called or referenced and automatically executed when the program starts. It becomes handy when there is package level variables that should be precomputed.
 #### 1.3.2 Order of Compiling
 Initialization proceeds from the bottom up; the main package is the last to be initialized. If a has dependency on b, b initialized before a.
+## 2 Basic Data Types
+### 2.1 String
+String is immutalbe so two copies of a string share same underlying memory, including substring. To manipulate slices of bytes, one can use bytes package. Since strings are immutable, building up strings incrementally an involves a lot of allocation and copying. Thus, using bytes.Buffer type will be helpful. \
+Therefore substring operations are cheap. String uses escape sequence. However, you can use ` instead of double quote for raw string literal. Raw string literal won't process escape sequence. Therefore, it is good for HTML templates, JSON literals, command messages, etc.
+#### 2.1.1 Packages
+There are strings package, bytes package, strcnv package, unicode package, and etc for string data type. strcnv provides functions for converting boolean, integer, floating-point value to and from their string representations, and function for quoting and unquoting strings. unicode package provides IsDigit, IsLetter,IsUpper, IsLower, and etc which some are provided by string package as well.
 ## Function
 ``` Go
 func name(f param) float64 {
