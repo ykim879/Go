@@ -63,6 +63,44 @@ String is immutalbe so two copies of a string share same underlying memory, incl
 Therefore substring operations are cheap. String uses escape sequence. However, you can use ` instead of double quote for raw string literal. Raw string literal won't process escape sequence. Therefore, it is good for HTML templates, JSON literals, command messages, etc.
 #### 2.1.1 Packages
 There are strings package, bytes package, strcnv package, unicode package, and etc for string data type. strcnv provides functions for converting boolean, integer, floating-point value to and from their string representations, and function for quoting and unquoting strings. unicode package provides IsDigit, IsLetter,IsUpper, IsLower, and etc which some are provided by string package as well.
+##### (1) strings
+###### HasPrefix
+``` Go
+strings.HasPrefix(str, prefix)
+```
+##### (2) Buffer
+As string it self is immutalbe, Buffer type is efficient for amnipulating byte slices. Buffer starts out empty and grow as string, byte, and []byte grows into it. 
+### 2.2 Constants
+Constans is a value known to complier and whose evaluation is guaranteed to occur at compile time. Benefits from compile time are:
+(1) reduce work on runtime which enable other compiler optimization.
+(2) Errors are caught in compile time, which reduces runtime errors.
+
+When sequence of constants is declared as a group, right-hand side can be ommited with imply previous expression is being used.
+``` Go
+const (
+a = 1
+b // b is 1
+)
+```
+#### 2.2.1 iota : Constant Generator
+iota create a sequence of related values without spelling out. Use cases are below
+``` Go
+type Weekday int
+const (
+Sunday Weekday = iota // generate value starting with zero
+Monday // Monday is 1
+Tuesday // 2
+...
+)
+```
+``` Go
+type Flags unit
+const (
+FlagUp Flags = 1 << iota // 1
+FlagBroadcast // 1 << 1 so two and sucessive will be power of previous
+...
+)
+```
 ## Function
 ``` Go
 func name(f param) float64 {
@@ -79,11 +117,7 @@ for _, arg := range arr[1:] {
 ```
 ## Standard Libraries
 ### default
-#### strings
-##### HasPrefix
-``` Go
-strings.HasPrefix(str, prefix)
-```
+
 ### 1. os
 #### Printf
 ##### Percent Sign
