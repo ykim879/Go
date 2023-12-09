@@ -1,5 +1,10 @@
 # Go
 Go is a complied language. The toolchain convert source language to native. The source code begins with package of the code, import statement, and program code. This is mostly referenced from the book The Go Programming Language by Alan and Brian, having same structure as well.
+## Table of Content
+[1. Program Structure ](#item_one)
+[2. Basic Data Types ](#item_two)
+
+<a id = "item_one"></a>
 ## 1. Program Structure 
 ### 1.1 Initialization
 Format:
@@ -57,6 +62,8 @@ for i:= 1; i < len(os.Args); i++ {
 init function can't be called or referenced and automatically executed when the program starts. It becomes handy when there is package level variables that should be precomputed.
 #### 1.3.2 Order of Compiling
 Initialization proceeds from the bottom up; the main package is the last to be initialized. If a has dependency on b, b initialized before a.
+
+<a id = "item_two"></a>
 ## 2 Basic Data Types
 ### 2.1 String
 String is immutalbe so two copies of a string share same underlying memory, including substring. To manipulate slices of bytes, one can use bytes package. Since strings are immutable, building up strings incrementally an involves a lot of allocation and copying. Thus, using bytes.Buffer type will be helpful. \
@@ -100,6 +107,21 @@ FlagUp Flags = 1 << iota // 1
 FlagBroadcast // 1 << 1 so two and sucessive will be power of previous
 ...
 )
+```
+
+## 3. Composite Types
+In Go, there are four composite types: arrays, slices, maps, and structs. Array is merely used because of fixed-length and alternatively slices are used because of its versatile.
+### 3.1 Array
+There are several attributes about array:
+1. the size of the array is part of its type. Also it is computed on compiled time so different size cannot be placed during runtime.
+2. to be both array same, they need to store same values for same indexes and same size.
+Here are few example codes regarding array. 
+``` Go
+for i, v := range arr {
+...
+} // loop around array, if index is not usable, then replace it with _
+q := [...]int{1,2,3} // size can be ommitted if it starts with initilizer
+r := [...]int{99:-1} // this defines array w with 100 eleemnts all zero except for the last, which is value -1/
 ```
 ## Function
 ``` Go
