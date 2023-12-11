@@ -1,8 +1,8 @@
 # Go
 Go is a complied language. The toolchain convert source language to native. The source code begins with package of the code, import statement, and program code. This is mostly referenced from the book The Go Programming Language by Alan and Brian, having same structure as well.
 ## Table of Content
-[1. Program Structure ](#item_one)
-[2. Basic Data Types ](#item_two)
+1. [Program Structure ](#item_one)
+2. [Basic Data Types ](#item_two)
 
 <a id = "item_one"></a>
 ## 1. Program Structure 
@@ -121,7 +121,24 @@ for i, v := range arr {
 ...
 } // loop around array, if index is not usable, then replace it with _
 q := [...]int{1,2,3} // size can be ommitted if it starts with initilizer
-r := [...]int{99:-1} // this defines array w with 100 eleemnts all zero except for the last, which is value -1/
+r := [...]int{99:-1} // this defines array w with 100 eleemnts all zero except for the last, which is value -1
+```
+### 3.2 Slices
+1. variable-length sequce which is lightweight data structure that gives subsequence of the elements of the array (underlying array).
+2. not comparable through ==.
+3. zero value is nil, where lenght and capacity is 0.
+#### 3.2.1 Composition
+it has tree components: pointer, length, capacity. Length and capacity can be accessed by built-in function, len and cap. When the slice operator creates the slice of the array, it refers with the pointer. Therefore, the change of the slice will apply on original array and vice versa. The slice can be expanded by using [:j] operator if j does not exceed capacity
+``` Go
+// assume arr is array of size 12
+slice = arr[6:9] // slice points to array[6] with len of 3 and capacity 9.
+expanded = slice[:5] // expanded the slice length. 
+```
+#### 3.2.2 make function
+it creates a slice of specified element type, length and optional capacity.
+``` Go
+make([]T, len)
+make([]T, len, cap)
 ```
 ## Function
 ``` Go
