@@ -140,6 +140,34 @@ it creates a slice of specified element type, length and optional capacity.
 make([]T, len)
 make([]T, len, cap)
 ```
+#### 3.2.3 append function
+append value to the slice. when the capacity is less than the elements it is adding, it grows by growth strategy by copying one slice to another. Therefore, the runtime is constant in average.
+``` Go
+var x []int // initialize slice
+x = append(x,1) //append value with growing the slices.
+```
+### 3.3 Maps
+1. map type is written map[K]V where K and V is type of key and value
+2. all keys need to be same type and values need to be same type but key and value do not have to be.
+3. map eleement is not a variable so it does not have adress. It is because maps grows, the exisiting elements may change their storage during runtime.
+4. key and value are retrieved by range function.
+5. set does not exist in Go, therefore map[T]boolean can replace sets
+#### 3.3.1 Initialization
+``` Go
+ages := map[string]int{
+"alice": 31
+}
+```
+``` Go
+ages := make(map[string]int)
+ages["alice"] = 31
+```
+#### 3.3.2 delete
+``` Go
+delete(ages, "alice")
+```
+#### 3.3.3 retrieve
+If the key does not exist, it will give zero value. To know if the key exists in map, map[k] returns value of the key and boolean to see if the key exists.
 ## Function
 ``` Go
 func name(f param) float64 {
